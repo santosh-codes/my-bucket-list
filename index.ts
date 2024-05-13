@@ -3,8 +3,10 @@ import dotenv from "dotenv";
 import TaskRoute from "./src/routes/task";
 import swaggerUi from "swagger-ui-express";
 import swaggerJSDoc from "swagger-jsdoc";
+import { Run } from "./db/index";
 
 dotenv.config();
+Run();
 const PORT = process.env.PORT || 8000;
 
 // Define Swagger JSDoc configuration options
