@@ -1,1 +1,4 @@
-console.log("This is App.ts");
+import express from "express";
+
+const app = express();
+export default app;
