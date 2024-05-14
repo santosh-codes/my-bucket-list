@@ -1,10 +1,9 @@
 import { Router } from "express";
-import { deleteTask, getAllTask } from "../controllers/task";
+import { getAllTask } from "../controllers/task/query";
 
 const TaskRoute = Router();
 
 // Add Swagger annotations for the routes
 TaskRoute.get("/getAllTask", getAllTask);
-TaskRoute.delete("/task/:taskId", deleteTask);
 
 export default TaskRoute;
