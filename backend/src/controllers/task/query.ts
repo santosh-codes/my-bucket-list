@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { getDbClient } from "../../../db";
+import { getDbClient } from "../../../backend/db";
 
 /**
  * @swagger
