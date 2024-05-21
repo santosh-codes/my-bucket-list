@@ -1,13 +1,21 @@
 import { Request, Response } from "express";
 import { getDbClient } from "../../../db";
 
+/**
+ * @swagger
+ * /createTask:
+ *   post:
+ *     summary: Retrieve all tasks
+ *     responses:
+ *       200:
+ *         description: Successful operation
+ */
+
 const createTask = async (req: Request, res: Response) => {
   try {
-    console.log("Request Body", req.body);
     const db = await getDbClient();
     const tasks = db.database.collection("tasks");
     const data = req.body;
-    console.log("Data received:", data);
     const result = await tasks.insertOne(data);
 
     await db.client.close();

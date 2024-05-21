@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { getDbClient } from "../../../db";
+import { ObjectId } from "mongodb";
 
 /**
  * @swagger
@@ -10,17 +11,14 @@ import { getDbClient } from "../../../db";
  *       200:
  *         description: Successful operation
  */
-const getAllTaskById = async (req: Request, res: Response) => {
+const getTaskById = async (req: Request, res: Response) => {
   try {
     const db = await getDbClient();
     const tasks = db.database.collection("tasks");
     const taskId = req.params.id;
-    const query = { id: taskId };
+    const query = { _id: new ObjectId(taskId) };
     const task = await tasks.findOne(query);
-    console.log("Task List", task);
-
     await db.client.close();
-
     res.send(task);
   } catch (error: any) {
     console.log(error.message);
@@ -30,4 +28,4 @@ const getAllTaskById = async (req: Request, res: Response) => {
   }
 };
 
-export { getAllTaskById };
+export { getTaskById };
