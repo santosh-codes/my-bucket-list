@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
-import { getDbClient } from "../../../backend/db";
+import { getDbClient } from "../../../db";
+import { ObjectId } from "mongodb";
 
 /**
  * @swagger
@@ -10,24 +11,21 @@ import { getDbClient } from "../../../backend/db";
  *       200:
  *         description: Successful operation
  */
-const getAllTask = async (req: Request, res: Response) => {
+const getTaskById = async (req: Request, res: Response) => {
   try {
     const db = await getDbClient();
-    const movies = db.database.collection("movies");
-
-    // Query for a movie that has the title 'Back to the Future'
-    const query = { title: "Back to the Future" };
-    const movie = await movies.findOne(query);
-    console.log("movies list", movie);
-
+    const tasks = db.database.collection("tasks");
+    const taskId = req.params.id;
+    const query = { _id: new ObjectId(taskId) };
+    const task = await tasks.findOne(query);
     await db.client.close();
-
-    res.send(movie);
+    res.send(task);
   } catch (error: any) {
+    console.log(error.message);
     res.status(500).json({
-      message: error.message || "Internal Server Error",
+      Message: "Internal Server Error",
     });
   }
 };
 
-export { getAllTask };
+export { getTaskById };

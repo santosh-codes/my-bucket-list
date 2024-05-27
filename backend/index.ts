@@ -1,6 +1,6 @@
 import app from "./app";
 import dotenv from "dotenv";
-import { getDbClient } from "./backend/db/index";
+import { getDbClient } from "./db";
 
 dotenv.config();
 getDbClient()

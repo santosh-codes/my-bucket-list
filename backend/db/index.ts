@@ -8,7 +8,7 @@ const client = new MongoClient(uri);
 
 export async function getDbClient() {
   await client.connect();
-  const database = client.db("sample_mflix");
+  const database = client.db("my-bucket-list");
 
   return { database, client };
 }
